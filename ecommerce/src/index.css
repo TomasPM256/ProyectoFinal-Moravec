@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    line-height: 1.6;
+}
+
+/* Estilos del NavBar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #222;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-links a {
+    color: lightblue;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #87CEEB;
+    text-decoration: underline;
+}
+
+/* Estilos del CartWidget */
+.cart-widget {
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.cart-widget:hover {
+    transform: scale(1.1);
+}
+
+.cart-count {
+    background-color: red;
+    border-radius: 50%;
+    padding: 2px 8px;
+    color: white;
+    font-weight: bold;
+    margin-left: 5px;
+    font-size: 14px;
+    min-width: 20px;
+    text-align: center;
+    display: inline-block;
+}
+
+/* Estilos del ItemListContainer */
+.item-list-container {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.item-list-container h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+    }
+
+    .nav-links {
+        gap: 10px;
+    }
+
+    .navbar h1 {
+        font-size: 20px;
+    }
+
+    .item-list-container {
+        padding: 20px 10px;
+    }
+
+    .item-list-container h2 {
+        font-size: 24px;
+    }
+}
