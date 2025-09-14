@@ -1,33 +1,37 @@
-import React from 'react'
-import { Routes, Route, Link } from 'react-router-dom'
-import ItemListContainer from './pages/ItemListContainer'
-import ItemDetailContainer from './pages/ItemDetailContainer'
-import CartPage from './pages/CartPage'
-import CheckoutPage from './pages/CheckoutPage'
-import { CartWidget } from './components/CartWidget'
-import { CartProvider } from './context/CartContext'
+import React from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
-export default function App(){
+import NavBar from "./components/NavBar";
+import ItemListContainer from "./pages/ItemListContainer";
+import ItemDetailContainer from "./pages/ItemDetailContainer";
+import Checkout from "./pages/Checkout";
+
+function App() {
   return (
-    <CartProvider>
-      <div>
-        <nav className="nav">
-          <Link to="/">Catalogo</Link>
-          <Link to="/category/1">Categoria 1</Link>
-          <Link to="/cart">Carrito</Link>
-          <CartWidget />
-        </nav>
-        <main className="container">
-          <Routes>
-            <Route path="/" element={<ItemListContainer />} />
-            <Route path="/category/:categoryId" element={<ItemListContainer />} />
-            <Route path="/item/:id" element={<ItemDetailContainer />} />
-            <Route path="/cart" element={<CartPage />} />
-            <Route path="/checkout" element={<CheckoutPage />} />
-          </Routes>
-        </main>
-      </div>
-    </CartProvider>
-  )
+    <BrowserRouter>
+      <NavBar />
+
+      <main style={{ padding: "1rem", maxWidth: 1100, margin: "0 auto" }}>
+        <Routes>
+          <Route path="/" element={<ItemListContainer />} />
+          <Route path="/category/:categoryId" element={<ItemListContainer />} />
+          <Route path="/item/:id" element={<ItemDetailContainer />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route
+            path="*"
+            element={
+              <div>
+                <h2>Página no encontrada</h2>
+                <p>
+                  Volver al inicio: <Link to="/">Home</Link>
+                </p>
+              </div>
+            }
+          />
+        </Routes>
+      </main>
+    </BrowserRouter>
+  );
 }
 
+export default App;

@@ -1,39 +1,29 @@
-// src/components/ItemListContainer.jsx
-import React, { useEffect, useState } from "react";
-import Item from "../components/Item";
-import { useParams } from "react-router-dom";
-import { getProducts, getProductsByCategory } from "../firebase";
+import React, { useEffect, useState } from "react"; import { useParams } from "react-router-dom";
+import ItemList from "../components/ItemList";
+import { fetchProducts } from "../../mi-ecommerce/src/mocks/products";
+
 
 export default function ItemListContainer() {
   const { categoryId } = useParams();
-  const [items, setItems] = useState([]);
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
-
-    const fn = categoryId ? getProductsByCategory : getProducts;
-
-    fn(categoryId)
-      .then(res => {
-        console.log("Productos traídos:", res); // <-- mirá esto en la consola del navegador
-        setItems(res);
-      })
-      .catch(err => {
-        console.error("Error al traer productos:", err);
-        setItems([]);
-      })
+    fetchProducts(categoryId)
+      .then((res) => setProducts(res))
       .finally(() => setLoading(false));
   }, [categoryId]);
-
-  if (loading) return <div className="loader">Cargando productos...</div>;
-  if (!items || items.length === 0) return <div>No hay productos</div>;
-
+  
   return (
-    <div className="grid">
-      {items.map(i => (
-        <Item key={i.id} item={i} />
-      ))}
+    <div>
+      {loading ? (
+        <p>Cargando productos...</p>
+      ) : products.length === 0 ? (
+        <p>No hay productos en esta categoría.</p>
+      ) : (
+        <ItemList products={products} />
+      )}
     </div>
   );
 }
